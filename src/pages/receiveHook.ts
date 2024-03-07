@@ -1,34 +1,21 @@
 import type { APIRoute } from 'astro';
-import { db, WebHooks } from 'astro:db';
+import { db, Changelog, sql } from 'astro:db';
 
-export const ALL: APIRoute = async (context) => {
-  // try {
-  //   await db.insert(WebHooks).values({
-  //     content: await getBody(context.request),
-  //     headers: context.request.headers,
-  //   });
-  // } catch (e: any) {
-  //   return new Response(JSON.stringify({
-  //     error: e.message,
-  //   }), {
-  //     status: 500,
-  //     headers: {
-  //       'content-type': 'application/json',
-  //     }
-  //   });
-  // }
+export const ALL: APIRoute = async () => {
+  await db.transaction(async tx => {
+    const { count } = (await tx.select({
+      count: sql`COUNT(*)`,
+    }).from(Changelog)
+      .get())!;
+
+    await tx.insert(Changelog).values({
+      changeset: `Increased from ${count}`,
+      committer: 'Hook',
+    });
+  });
 
   return new Response('OK', {
     status: 200,
   });
 };
-
-async function getBody(request: Request): Promise<unknown> {
-  const text = await request.text();
-  try {
-    return JSON.parse(text);
-  } catch {
-    return text;
-  }
-}
 
