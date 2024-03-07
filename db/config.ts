@@ -1,15 +1,18 @@
-import { defineDB, defineTable, column } from 'astro:db';
+import { defineDB, defineTable, column, sql } from 'astro:db';
 
-const Comments = defineTable({
+const WebHooks = defineTable({
   columns: {
     id: column.number({ primaryKey: true }),
-    content: column.text({ default: 'No content' }),
-    author: column.text(),
+    timestamp: column.number({
+      default: sql`CURRENT_TIMESTAMP`,
+    }),
+    content: column.json(),
+    headers: column.json(),
   },
 });
 
 export default defineDB({
   tables: {
-    Comments,
+    WebHooks,
   },
 });
