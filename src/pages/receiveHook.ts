@@ -4,7 +4,7 @@ import { db, WebHooks } from 'astro:db';
 export const ALL: APIRoute = async (context) => {
   try {
     await db.insert(WebHooks).values({
-      content: await context.request.json(),
+      content: await getBody(context.request),
       headers: context.request.headers,
     });
   } catch (e: any) {
@@ -22,4 +22,13 @@ export const ALL: APIRoute = async (context) => {
     status: 200,
   });
 };
+
+async function getBody(request: Request): Promise<unknown> {
+  const text = await request.text();
+  try {
+    return JSON.parse(text);
+  } catch {
+    return text;
+  }
+}
 
