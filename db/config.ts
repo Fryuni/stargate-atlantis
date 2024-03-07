@@ -11,8 +11,17 @@ const WebHooks = defineTable({
   },
 });
 
+const Changelog = defineTable({
+  columns: {
+    id: column.number({ primaryKey: true }),
+    committer: column.text(),
+    changeset: column.text(),
+  },
+});
+
 export default defineDB({
   tables: {
     WebHooks,
+    Changelog,
   },
 });
