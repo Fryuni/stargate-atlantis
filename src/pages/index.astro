@@ -1,4 +1,17 @@
 ---
+import {db, Comments} from 'astro:db';
+
+const res = await db.insert(Comments).values([
+	{author: 'Alice'},
+]);
+
+console.log(res);
+
+const res2 = await db.select().from(Comments);
+
+console.log(res2);
+
+await db.delete(Comments);
 
 ---
 
