@@ -10,13 +10,15 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/db": "^0.6.4",
-    "@astrojs/node": "^8.2.3",
-    "@astrojs/vercel": "^7.3.5",
-    "astro": "^4.4.13"
+    "@astrojs/db": "file:db.tgz",
+    "@astrojs/node": "^8.3.2",
+    "@astrojs/vercel": "^7.7.2",
+    "astro": "^4.11.3"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.5.6",
-    "typescript": "^5.4.2"
-  }
+    "@astrojs/check": "^0.7.0",
+    "drizzle-orm": "^0.31.2",
+    "typescript": "^5.5.2"
+  },
+  "packageManager": "pnpm@9.5.0-beta.0+sha512.c2e60e7ed04e459591c982f2760cd8f7d1f48fe1ca4d46ccbbf8377df1eb2d077ace1e9d334b06250dddf23c03b4562858f77992b9a3bb4a93355aefd173df32"
 }

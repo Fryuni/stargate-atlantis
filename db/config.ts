@@ -1,4 +1,4 @@
-import { defineDB, defineTable, column, sql } from 'astro:db';
+import { defineDb, defineTable, column, sql } from 'astro:db';
 
 const WebHooks = defineTable({
   columns: {
@@ -19,7 +19,7 @@ const Changelog = defineTable({
   },
 });
 
-export default defineDB({
+export default defineDb({
   tables: {
     WebHooks,
     Changelog,
